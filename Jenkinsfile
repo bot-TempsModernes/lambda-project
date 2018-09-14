@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'pytest tests/test_generator.py'
+                sh 'python -m pytest -v tests/test_generator.py'
             }
         }
         stage('Deliver') {
