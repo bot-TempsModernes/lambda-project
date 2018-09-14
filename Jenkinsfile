@@ -14,7 +14,10 @@ pipeline {
         }
         stage('Linter') {
             steps {
-                sh 'flake8 .'
+                sh """
+                    flake8 buzz/
+                    flake8 test/
+                   """
             }
         }
         stage('Test') {
