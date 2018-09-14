@@ -10,8 +10,11 @@ pipeline {
                 sh 'apk update && apk upgrade && apk add --no-cache git'
                 sh 'ls'
                 sh 'rm -rf lambda-project'
+                sh 'ls'
                 sh 'git clone https://github.com/bot-TempsModernes/lambda-project.git'
+                sh 'ls'
                 sh 'cd lambda-project'
+                sh 'ls'
                 sh 'pip install -r requirements.txt'
             }
         }
