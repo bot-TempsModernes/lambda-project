@@ -12,11 +12,6 @@ pipeline {
             steps {
                 echo "Stage Test"
             }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
-                }
-            }
         }
         stage('Deliver') {
             agent none
