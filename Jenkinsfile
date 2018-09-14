@@ -8,10 +8,16 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'apk update && apk upgrade && apk add --no-cache git'
+                sh 'ls'
                 sh 'rm -rf lambda-project'
                 sh 'git clone https://github.com/bot-TempsModernes/lambda-project.git'
                 sh 'cd lambda-project'
                 sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Linter') {
+            steps {
+                sh 'flake8 .'
             }
         }
         stage('Test') {
@@ -23,6 +29,12 @@ pipeline {
             agent none
             steps {
                 echo "Stage Deliver"
+            }
+        }
+        post {
+            always {
+                echo 'One way or another, I have finished'
+                deleteDir() /* clean up our workspace */
             }
         }
     }
