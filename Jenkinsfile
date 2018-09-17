@@ -14,15 +14,12 @@ pipeline {
         }
         stage('Linter') {
             steps {
-                sh """
-                    flake8 buzz/
-                    flake8 test/
-                   """
+                sh "flake8 ."
             }
         }
         stage('Test') {
             steps {
-                sh 'python -m pytest -v tests/test_generator.py'
+                sh 'python -m pytest -v'
             }
         }
         stage('Deliver') {
