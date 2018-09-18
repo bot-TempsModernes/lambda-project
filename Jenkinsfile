@@ -25,10 +25,18 @@ pipeline {
         stage('Deliver') {
             agent none
             steps {
-                echo "Stage Deliver"
+		 script {
+                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        timeout(time: 3, unit: 'MINUTES') {
+                            // you can use the commented line if u have specific user group who CAN ONLY approve
+                            //input message:'Approve deployment?', submitter: 'it-ops'
+                            input message: 'Approve deployment?'
+                        }
+                    }
+                 }
+                 echo "Stage Deliver"
             }
         }
-    }
         post {
             always {
                 echo 'One way or another, I have finished'
